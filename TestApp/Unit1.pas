@@ -35,20 +35,16 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  if (TJBuild_VERSION.JavaClass.SDK_INT >= 23) then
-  begin
-    if (TAndroidHelper.context.checkSelfPermission(StringToJString('android.permission.ACCESS_COARSE_LOCATION'))
-      = TJPackageManager.JavaClass.PERMISSION_DENIED) then
-    begin
+  if TJBuild_VERSION.JavaClass.SDK_INT >= 23 then
+    if TAndroidHelper.context.checkSelfPermission(StringToJString('android.permission.ACCESS_COARSE_LOCATION'))
+      = TJPackageManager.JavaClass.PERMISSION_DENIED then
       TAndroidHelper.Activity.requestPermissions(CreateJavaStringArray(['android.permission.ACCESS_COARSE_LOCATION']),
-        PERMISSION_REQUEST_CODE);
-    end
+        PERMISSION_REQUEST_CODE)
     else
     begin
       Memo1.Lines.Clear;
       Memo1.Lines.Add('Права уже выданы!');
     end;
-  end;
 end;
 
 procedure TForm1.onReceivePermissionsResult(const ASender: TObject; const AMessage: TMessage);
@@ -59,8 +55,6 @@ var
   I: Integer;
   J: Integer;
 begin
-  Label1.Text := '1';
-
   if (AMessage <> nil) and (AMessage is TMessageResultPermissions) then
   begin
     RequestCode := TMessageResultPermissions(AMessage).Value;
