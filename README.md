@@ -7,8 +7,9 @@ The activity contains the [onRequestPermissionsResult](https://developer.android
 1) Add the "**Custom.jar**" library to your project through "**Project Manager**".
 2) Connect the unit "**CustomActivityEvent.pas**" to the project.
 3) Implement the method "**procedure onReceivePermissionsResult(const ASender: TObject; const AMessage: TMessage);**" In the form class.
-4) Open the file "**AndroidManifest.template.xml**", find "**com.embarcadero.firemonkey.FMXNativeActivity**", replace with "**com.embarcadero.firemonkey.CustomActivity**".
-5) Done.
+4) Register method "**TMessageManager.DefaultManager.SubscribeToMessage(TMessageResultPermissions, onReceivePermissionsResult);**"
+5) Open the file "**AndroidManifest.template.xml**", find "**com.embarcadero.firemonkey.FMXNativeActivity**", replace with "**com.embarcadero.firemonkey.CustomActivity**".
+6) Done.
 
 Tested: Delphi 10.1 Berlin +
 
